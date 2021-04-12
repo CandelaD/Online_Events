@@ -20,8 +20,7 @@ class EventsController < ApplicationController
 
     def create
         @event = Event.create(title: params[:event][:title], description: params[:event][:description])
-        render json: @event
+        redirect_to @event
     end
-
 
 end

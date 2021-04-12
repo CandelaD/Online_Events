@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get "home/index"
   root :to => "home#index"
 
-  get "events/new", to: "events#new"
   get "events", to: "events#new"
+  #get "events/new", to: "events#new"
   get "events/:id", to: "events#show"
   get "events/:id/edit", to: "events#edit"
 
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   post "events", to: "events#create"
   patch "/events/:id", to:  "events#update", as: :event
+
+
   
 end 
 
