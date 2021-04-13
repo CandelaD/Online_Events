@@ -18,9 +18,10 @@ class EventsController < ApplicationController
         redirect_to @event
     end
 
+    
     def create
         @event = Event.create(title: params[:event][:title], description: params[:event][:description])
-        redirect_to @event
-    end
+    #   redirect_to @event
+     end
 
 end
