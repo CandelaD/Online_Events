@@ -18,6 +18,7 @@ class EventsController < ApplicationController
 
     #PATCH events/:id
     def update
+        @event = Event.find(params[:id])
         @event = Event.update(title: params[:event][:title], description: params[:event][:description])
         
         redirect_to @event
@@ -27,8 +28,15 @@ class EventsController < ApplicationController
     def create
         @event = Event.new(title: params[:event][:title],
                               description: params[:event][:description]) 
-        
         render json: @event
+    
      end
+
+    def destroy
+        @event = Event.find(params[:id])
+        @event.destroy
+        redirect_to root_path
+
+    end
 
 end

@@ -4,7 +4,9 @@
 </p>
 
 <p>
-  <strong>Text:</strong>
   <%= @event.description %>
 </p>
 
+<div>
+  <%= link_to "Delete event", @event, method: :delete%> 
+</div>
