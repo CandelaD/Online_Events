@@ -26,17 +26,17 @@ class EventsController < ApplicationController
 
     #POST /events
     def create
-        @event = Event.new(title: params[:event][:title],
-                              description: params[:event][:description]) 
-        render json: @event
-    
+        @event = Event.create(title: params[:event][:title]) 
+        
+        redirect_to @event
      end
 
+
+    #DELETE /events/:id
     def destroy
         @event = Event.find(params[:id])
         @event.destroy
         redirect_to root_path
-
     end
 
 end
