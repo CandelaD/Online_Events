@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   after_create :send_mail
+
+  has_and_belongs_to_many :events
+
 end
 
 def send_mail
