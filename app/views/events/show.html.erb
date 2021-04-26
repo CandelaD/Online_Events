@@ -1,11 +1,14 @@
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+ <h1> <strong>Title:</strong> </h1>
 
-<p>
+<div>
+  <%= @event.title %>
+</div>
+
+<div>
+  <strong>Description:</strong>
   <%= @event.description %>
-</p>
+</div>
+
 
 <div>
   <%= link_to "Delete event", @event, method: :delete%> 

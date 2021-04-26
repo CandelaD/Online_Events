@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   get "home/index"
   root :to => "home#index"
 
-  get "events", to: "events#new"
+
+  get "events", to: "events#index"
   get "events/new", to: "events#new"
-  get "events/:id", to: "events#show"
+  get "events/:id", to: "events#show" #, as: :event
   get "events/:id/edit", to: "events#edit"
 
   post "events", to: "events#create"
