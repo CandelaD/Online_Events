@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
 
   get "events", to: "events#index"
-  get "events/new", to: "events#new"
-  get "events/:id", to: "events#show" #, as: :event
+  get "events/new", to: "events#new", as: :new_events
+  get "events/:id", to: "events#show", as: :event_show
   get "events/:id/edit", to: "events#edit"
 
   post "events", to: "events#create"

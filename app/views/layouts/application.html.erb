@@ -2,7 +2,7 @@
 <html>
   
   <head>
-    <title>Blog</title>
+    <title>Online Events</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,8 +14,9 @@
 
 
   <body>
-    <center>
-     <%=link_to 'log out', destroy_user_session_path, method: :delete %>
+    <%=link_to 'log out', destroy_user_session_path, method: :delete %>
+    <%= render "partials/nav"%>
+
     <%if notice %>
       <p class="alert alert-primary"><%= notice %></p>
     <%end%>
