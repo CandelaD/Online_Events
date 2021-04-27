@@ -1,41 +1,37 @@
 
 <%= form_with(model: @event, local: true) do |form| %>
-    <div><br />
-        <p>Event Title</p>
+
+<%# titulo %>
+    <div class="field">
         <%=form.label :title %>
         <%=form.text_field :title %>
     </div>
 
-    <div><br />
-        <p>Event Date</p>
+<%# fecha %>
+    <div class="field">
         <%=form.label :date%>
         <%= form.date_field :date %>
     </div>
 
-    <div><br />
+<%# hora %>
+    <div class="field">
         <%=form.label :start_time%>
         <%= form.time_field :time%>
-
     </div>
 
-    <div><br />
-        <p>Who organizes?</p>
-        <%=form.label :name %>
+<%# quién organiza %>
+    <div class="field">
+        <%=form.label :user_name %>
         <%= form.text_field :name %>
 
-    </div><br />
-        <%=form.label :phone%>
-        <%=form.text_field :phone%>
-        <p>
-    </div>
-    
-    <div><br />
-        <p>
+<%# descripción %>
+    <div class="field"; style= max-width:500px;>
         <%= form.label :description%> (optional)
         <%= form.rich_text_area :description%>
     </div>
 
-    <div>
+<%# botón enviar %>
+    <div class="field">
         <%= form.submit %>
     </div>
-<%end%> 
+<%end%>
