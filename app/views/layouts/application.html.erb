@@ -12,11 +12,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-
+<center>
   <body>
-    <%=link_to 'log out', destroy_user_session_path, method: :delete %>
     <%= render "partials/nav"%>
-
     <%if notice %>
       <p class="alert alert-primary"><%= notice %></p>
     <%end%>

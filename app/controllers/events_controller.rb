@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
     before_action :find_article, except: [:new, :create, :index]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
     #GET events/index
     def index
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
         @event = Event.create(title: params[:event][:title],
                               description: params[:event][:description]) 
         
-        redirect_to @event
+        redirect_to @event, notice: 'Event was successfully created.'
      end
 
 
