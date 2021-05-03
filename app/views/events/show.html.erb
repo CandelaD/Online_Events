@@ -1,17 +1,17 @@
+<div class="large-container center-block">
+  <h1> <%= @event.title %> </h1>
+  <div>
+    <%= @event.description %>
+    <p> <strong>When?</strong> The event will be happening on <%= @event.event_date.strftime("%a, %B %d, %Y") %> at <%= @event.event_time.strftime("%H:%M%p")%>.</p>
+  </div>
 
- <h1> <strong>Title:</strong> </h1>
+  <div>
+    <p> Created by <%= @event.host%>, </p>
+  </div>
 
-<div>
-  <%= @event.title %>
-</div>
+  <div>
+    <%= button_to 'Attend to event', attend_event_path(@event), method: :post, confirm: 'really?' %>
+    <%= link_to "Delete event", @event, method: :delete%> 
+  </div>
 
-<div>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</div>
-
-<%= button_to 'Attend', attend_event_path(@event), method: :post, confirm: 'really?' %>
-
-<div>
-  <%= link_to "Delete event", @event, method: :delete%> 
 </div>

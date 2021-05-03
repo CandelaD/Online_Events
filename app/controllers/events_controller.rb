@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    before_action :find_article, except: [:new, :create, :index]
+    before_action :find_article, except: [:new, :create, :index, :host]
     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :attend]
 
     #GET events/index
@@ -23,15 +23,21 @@ class EventsController < ApplicationController
     #PATCH events/:id
     def update
         @event = Event.update(title: params[:event][:title],
-                              description: params[:event][:description])
+                              description: params[:event][:description],
+                            event_date: params[:event][:event_date],
+                            event_time: params[:event][:event_time],
+                            host: params[:event][:host])
         
         redirect_to @event
     end
 
     #POST /events
     def create
-        @event = Event.create(title: params[:event][:title],
-                              description: params[:event][:description]) 
+        @event = current_user.events.create(title: params[:event][:title],
+                              description: params[:event][:description],
+                              event_date: params[:event][:event_date],
+                            event_time: params[:event][:event_time],
+                            host: params[:event][:host])
         
         redirect_to @event, notice: 'Event was successfully created.'
      end
@@ -47,6 +53,12 @@ class EventsController < ApplicationController
         @event = Event.find(params[:id])
     end
 
+    #GET /events/user/:user_id
+    def host
+        @host = User.find(params[:user_id])
+    end
+
+    #GET /events/:id/attends
     def attend
         @event.users << current_user
         @event.save

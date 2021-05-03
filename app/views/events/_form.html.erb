@@ -10,19 +10,19 @@
 <%# fecha %>
     <div class="field">
         <%=form.label :date%>
-        <%= form.date_field :date %>
+        <%= form.date_field :event_date %>
     </div>
 
 <%# hora %>
     <div class="field">
         <%=form.label :start_time%>
-        <%= form.time_field :time%>
+        <%= form.time_field :event_time%>
     </div>
 
 <%# quién organiza %>
     <div class="field">
         <%=form.label :user_name %>
-        <%= form.text_field :name %>
+        <%= form.text_field :host %>
 
 <%# descripción %>
     <div class="field"; style= max-width:500px;>

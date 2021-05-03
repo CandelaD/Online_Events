@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "events/:id", to: "events#show", as: :event_show
   get "events/:id/edit", to: "events#edit"
   get "events/:id/attend", to: "events#attend"
+  get "events/user/:user_id", to: "events#host"
 
   post "events", to: "events#create"
   patch "/events/:id", to:  "events#update", as: :event
