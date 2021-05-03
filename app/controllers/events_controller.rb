@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     before_action :find_article, except: [:new, :create, :index]
-    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :attend]
 
     #GET events/index
     def index
@@ -45,6 +45,11 @@ class EventsController < ApplicationController
 
     def find_article
         @event = Event.find(params[:id])
+    end
+
+    def attend
+        @event.users << current_user
+        @event.save
     end
 
 end

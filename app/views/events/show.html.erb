@@ -10,6 +10,7 @@
   <%= @event.description %>
 </div>
 
+<%= button_to 'Attend', attend_event_path(@event), method: :post, confirm: 'really?' %>
 
 <div>
   <%= link_to "Delete event", @event, method: :delete%> 
