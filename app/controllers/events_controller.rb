@@ -46,13 +46,11 @@ class EventsController < ApplicationController
     #DELETE /events/:id
     def destroy
         @event.destroy
+        flash[:danger] = 'Your event was DELETED successfully.'
         redirect_to root_path
     end
 
-    def find_article
-        @event = Event.find(params[:id])
-    end
-
+ 
     #GET /events/user/:user_id
     def host
         @host = User.find(params[:user_id])
@@ -62,6 +60,16 @@ class EventsController < ApplicationController
     def attend
         @event.users << current_user
         @event.save
+    end
+
+  private
+
+    def find_article
+        @event = Event.find(params[:id])
+    end
+
+    def event_params
+        params.require(:event).permit(:title, :description, :event_date, :event_time, :host)
     end
 
 end
