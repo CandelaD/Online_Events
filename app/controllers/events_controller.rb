@@ -12,6 +12,13 @@ class EventsController < ApplicationController
         @event = Event.new
     end
 
+    #POST /events
+    def create
+        @event = current_user.events.create(event_params)
+        
+        redirect_to @event, notice: 'Event was successfully created.'
+     end
+
     #GET events/:id
     def show
     end
@@ -22,31 +29,17 @@ class EventsController < ApplicationController
 
     #PATCH events/:id
     def update
-        @event = Event.update(title: params[:event][:title],
-                              description: params[:event][:description],
-                            event_date: params[:event][:event_date],
-                            event_time: params[:event][:event_time],
-                            host: params[:event][:host])
-        
-        redirect_to @event
+        if @event.update(event_params)
+			redirect_to @event, notice: "Your event was updated successfully"
+		else
+			render 'new'
+		end
     end
-
-    #POST /events
-    def create
-        @event = current_user.events.create(title: params[:event][:title],
-                              description: params[:event][:description],
-                              event_date: params[:event][:event_date],
-                            event_time: params[:event][:event_time],
-                            host: params[:event][:host])
-        
-        redirect_to @event, notice: 'Event was successfully created.'
-     end
-
 
     #DELETE /events/:id
     def destroy
         @event.destroy
-        flash[:danger] = 'Your event was DELETED successfully.'
+        flash[:alert] = 'Your event was DELETED successfully.'
         redirect_to root_path
     end
 
