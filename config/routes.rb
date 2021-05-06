@@ -1,27 +1,74 @@
+# == Route Map
+#
+#                  Prefix Verb   URI Pattern                             Controller#Action
+#                    root GET    /                                       static_pages#home
+#                    help GET    /help(.:format)                         static_pages#help
+#                   about GET    /about(.:format)                        static_pages#about
+#                  signup GET    /signup(.:format)                       users#new
+#                   login GET    /login(.:format)                        sessions#new
+#                         POST   /login(.:format)                        sessions#create
+#                  logout DELETE /logout(.:format)                       sessions#destroy
+#                   users GET    /users(.:format)                        users#index
+#                         POST   /users(.:format)                        users#create
+#                new_user GET    /users/new(.:format)                    users#new
+#               edit_user GET    /users/:id/edit(.:format)               users#edit
+#                    user GET    /users/:id(.:format)                    users#show
+#                         PATCH  /users/:id(.:format)                    users#update
+#                         PUT    /users/:id(.:format)                    users#update
+#                         DELETE /users/:id(.:format)                    users#destroy
+#                  events GET    /events(.:format)                       events#index
+#                         POST   /events(.:format)                       events#create
+#               new_event GET    /events/new(.:format)                   events#new
+#              edit_event GET    /events/:id/edit(.:format)              events#edit
+#                   event GET    /events/:id(.:format)                   events#show
+#                         PATCH  /events/:id(.:format)                   events#update
+#                         PUT    /events/:id(.:format)                   events#update
+#                         DELETE /events/:id(.:format)                   events#destroy
+#         event_attendees POST   /event_attendees(.:format)              event_attendees#create
+#          event_attendee DELETE /event_attendees/:id(.:format)          event_attendees#destroy
+# edit_account_activation GET    /account_activations/:id/edit(.:format) account_activations#edit
+#         password_resets POST   /password_resets(.:format)              password_resets#create
+#      new_password_reset GET    /password_resets/new(.:format)          password_resets#new
+#     edit_password_reset GET    /password_resets/:id/edit(.:format)     password_resets#edit
+#          password_reset PATCH  /password_resets/:id(.:format)          password_resets#update
+#                         PUT    /password_resets/:id(.:format)          password_resets#update
+#
+
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations"}
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  #get "/welcome", to: "home#index"
-  get "home/index"
-  root :to => "home#index"
+  devise_for :users
+	# Define which page is the root of the application
+	root 'home#index'
+	
+	# Named Routes
+
+	# By using get we arrange for the route to respond to a GET request
+	# get a page at some address http://localhost:3000/help
 
 
-  get "events", to: "events#index"
-  get "events/new", to: "events#new", as: :new_events
-  get "events/:id", to: "events#show", as: :event_show
-  get "events/:id/edit", to: "events#edit"
+	# The users resource lets us respond to the full suite of RESTful URLs
+
+	# Prefix    Verb    URI Pattern       Controller#Action
+	# users     GET     /users            users#index
+	#           POST    /users            users#create
+	# new_user  GET     /users/new        users#new
+	# edit_user GET     /users/:id/edit   users#edit
+	# user      GET     /users/:id        users#show
+	#           PUT     /users/:id        users#update
+	#           PATCH   /users/:id        users#update
+	#           DELETE  /users/:id        users#destroy
+
   get "events/:id/attend", to: "events#attend"
-  get "events/user/:user_id", to: "events#host"
 
-  post "events", to: "events#create"
-  patch "/events/:id", to:  "events#update", as: :event
-
-  delete "/events/:id", to: "events#destroy"
-
+	resources :users
+	resources :events
+	#resources :event_attendees, only: [:create, :destroy, :show]
+	# resources for account activations and password resets
+	resources :account_activations, only: [:edit]
+	resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :events do
     post 'attend', on: :member
   end
-  
-end 
+end
+
 
 
