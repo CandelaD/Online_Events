@@ -14,3 +14,4 @@
  *= require_self
  */
  @import "devise_styles.scss";
+ @import "nav.scss";
